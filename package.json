@@ -1,10 +1,11 @@
 {
-  "name": "fav",
+  "name": "employeetracker",
   "version": "1.0.0",
-  "description": "activity with mysql",
-  "main": "fav.js",
+  "description": "Unit 12 MySQL Homework: Employee Tracker",
+  "main": "server.js",
   "dependencies": {
-    "mysql": "^2.16.0",
-    "inquirer": "^8.0.0"
+    "dotenv": "^8.2.0",
+    "inquirer": "^8.0.0",
+    "mysql": "^2.16.0"
   }
 }
