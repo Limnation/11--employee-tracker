@@ -30,10 +30,36 @@ const prompts = () => {
         updateEmployeeRole();
         break;
       default:
-        endConnection();
+        exit();
         break;
     }
   });
+};
+
+// View All Employees
+viewAllEmployees = () => {};
+
+// View All Employees by Department
+viewAllEmployeesByDepartment = () => {};
+
+// View All Employees by Role
+viewAllEmployeesByRole = () => {};
+
+// Add Employee
+addEmployee = () => {};
+
+// Add Department
+addDepartment = () => {};
+
+// Add Role
+addRole = () => {};
+
+// Update Employee Role
+updateEmployeeRole = () => {};
+
+// exit
+exit = () => {
+  connection.end();
 };
 
 // Creates a function to initialize app
