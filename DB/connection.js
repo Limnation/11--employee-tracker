@@ -10,3 +10,6 @@ const connection = mysql.createConnection({
   password: process.env.PASSWORD_DB,
   database: process.env.DATABASE_DB,
 });
+
+//exports
+module.exports = { connection };
