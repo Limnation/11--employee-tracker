@@ -1,0 +1,10 @@
+{
+  "name": "fav",
+  "version": "1.0.0",
+  "description": "activity with mysql",
+  "main": "fav.js",
+  "dependencies": {
+    "mysql": "^2.16.0",
+    "inquirer": "^8.0.0"
+  }
+}
