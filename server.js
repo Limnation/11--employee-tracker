@@ -4,6 +4,9 @@ const inquirer = require("inquirer");
 // gets Specific arrays { questions } from questions.js
 const { questions } = require("./lib/questions.js");
 
+// gets Specific object { connection } from questions.js
+const { connection } = require("./db/questions.js");
+
 // arrow fucntion that prompts
 const prompts = () => {
   inquirer.prompt(questions).then((DBData) => {
