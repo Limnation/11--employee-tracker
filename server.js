@@ -6,9 +6,9 @@ const {
   questions,
   departments,
   managers,
-  addEmployee,
-  addDepartment,
-  addRole,
+  addEmployeeArr,
+  addDepartmentArr,
+  addRoleArr,
 } = require("./lib/questions.js");
 
 // gets Specific object { connection } from questions.js
@@ -101,15 +101,22 @@ viewAllEmployeesByManager = () => {
 
 // Add Employee
 addEmployee = () => {
-  inquirer.prompt(addEmployee).then((EmployeeData) => {
-    const sqlQuery = `
-    
-        `;
-    connection.query(sqlQuery, {}, (err, res) => {
-      if (err) throw err;
-      console.table(res);
-      prompts();
-    });
+  inquirer.prompt(addEmployeeArr).then((EmployeeData) => {
+    const sqlQuery = `INSERT INTO employees SET ?`;
+    connection.query(
+      sqlQuery,
+      {
+        first_name: EmployeeData.fName,
+        last_name: EmployeeData.LName,
+        role_id: EmployeeData.role,
+        manager_id: EmployeeData.managerName,
+      },
+      (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        prompts();
+      }
+    );
   });
 };
 
