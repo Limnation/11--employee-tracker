@@ -7,14 +7,14 @@ USE employees_db;
 
 -- Create table department
 CREATE TABLE department (
-  id INTEGER NOT NULL AUTO_INCREMENT NOT NULL,
+  id INTEGER NOT NULL AUTO_INCREMENT,
   name VARCHAR(30),
   PRIMARY KEY (id)
 );
 
 -- Create table roles
 CREATE TABLE roles (
-    id INTEGER NOT NULL AUTO_INCREMENT NOT NULL,
+    id INTEGER NOT NULL AUTO_INCREMENT,
     title VARCHAR(30) NOT NULL,
     salary DECIMAL(7,0) NOT NULL,
     department_id INTEGER NOT NULL,

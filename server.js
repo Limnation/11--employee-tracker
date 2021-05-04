@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 const { questions } = require("./lib/questions.js");
 
 // gets Specific object { connection } from questions.js
-const { connection } = require("./db/questions.js");
+const { connection } = require("./db/connection.js");
 
 // arrow fucntion that prompts
 const prompts = () => {
@@ -41,15 +41,14 @@ const prompts = () => {
 
 // View All Employees
 viewAllEmployees = () => {
-  connection.query(
-    `SELECT e.id, e.first_name, e.Last_name, r.title, d.name as "Department", salary, 
-    CONCAT (m.first_name," ", m.last_name) AS "Manager" 
-    FROM employee e INNER JOIN employee m ON e.manager_id = m.id 
-    LEFT JOIN role r ON e.role_id = r.id LEFT JOIN department d on r.department_id = d.id`,
-    (err) => {
-      if (err) throw err;
-    }
-  );
+  const sqlQuery = `SELECT et.id, et.first_name, et.last_name, rt.title, dt.name as "Department", salary, 
+    CONCAT (mt.first_name," ", mt.last_name) AS "Manager" 
+    FROM employees et INNER JOIN employees mt ON et.manager_id = mt.id 
+    LEFT JOIN roles rt ON et.role_id = rt.id LEFT JOIN department dt on rt.department_id = dt.id`;
+  connection.query(sqlQuery, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
 };
 
 // View All Employees by Department
