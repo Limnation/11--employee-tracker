@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 
 // gets Specific arrays { questions } from questions.js
-const { questions } = require("./lib/questions.js");
+const { questions, departments } = require("./lib/questions.js");
 
 // gets Specific object { connection } from questions.js
 const { connection } = require("./db/connection.js");
@@ -56,11 +56,19 @@ viewAllEmployees = () => {
 
 // View All Employees by Department
 viewAllEmployeesByDepartment = () => {
-  const sqlQuery = ``;
-  connection.query(sqlQuery, (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    prompts();
+  inquirer.prompt(departments).then((departmentsData) => {
+    const sqlQuery = `SELECT department.id AS 'department_id', name AS 'department', e.first_name, e.last_name
+    FROM department
+    LEFT JOIN roles r ON department.id = r.department_id
+    LEFT JOIN employees e ON e.role_id = r.id
+    where name='${departmentsData.department}'
+    GROUP BY department_id, name, e.first_name, e.last_name;
+    `;
+    connection.query(sqlQuery, (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      prompts();
+    });
   });
 };
 
