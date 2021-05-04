@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 
 // gets Specific arrays { questions } from questions.js
-const { questions, departments, manager } = require("./lib/questions.js");
+const { questions, departments, managers } = require("./lib/questions.js");
 
 // gets Specific object { connection } from questions.js
 const { connection } = require("./db/connection.js");
@@ -57,7 +57,8 @@ viewAllEmployees = () => {
 // View All Employees by Department
 viewAllEmployeesByDepartment = () => {
   inquirer.prompt(departments).then((departmentsData) => {
-    const sqlQuery = `SELECT department.id AS 'department_id', name AS 'department', e.first_name, e.last_name
+    const sqlQuery = `
+    SELECT department.id AS 'department_id', name AS 'department', e.first_name, e.last_name
     FROM department
     LEFT JOIN roles r ON department.id = r.department_id
     LEFT JOIN employees e ON e.role_id = r.id
@@ -74,8 +75,15 @@ viewAllEmployeesByDepartment = () => {
 
 // View All Employees by Manager
 viewAllEmployeesByManager = () => {
-  inquirer.prompt(manager).then((managerData) => {
-    const sqlQuery = ``;
+  inquirer.prompt(managers).then((managerData) => {
+    const sqlQuery = `
+    SELECT first_name, last_name, r.title
+    FROM employees e
+    LEFT JOIN roles r ON e.role_id = r.id
+    LEFT JOIN department d ON d.id = r.department_id
+    where first_name='${managerData.managerFName}'
+    GROUP BY first_name, last_name, r.title;
+    `;
     connection.query(sqlQuery, (err, res) => {
       if (err) throw err;
       console.table(res);
