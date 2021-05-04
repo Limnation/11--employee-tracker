@@ -20,8 +20,9 @@ VALUES
 INSERT INTO employees(first_name, last_name, role_id, manager_id) 
 VALUES
 ('Boby', 'Chiefy', 1, NULL),
-('Kitty', 'Chiefy', 1, NULL),
-('Billy', 'bobby', 2, NULL),
+('Kitty', 'Chiefy', 2, NULL),
+('Billy', 'bobby', 3, NULL),
 ('Doggy', 'Toy', 4, 1),
 ('Burnett', 'Vodka', 5, 1),
-('Tony', 'Tiger', 3, 1);
+('Espolon', 'Tequila', 6, 1),
+('Tony', 'Tiger', 7, 1);

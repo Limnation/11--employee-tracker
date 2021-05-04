@@ -41,33 +41,78 @@ const prompts = () => {
 
 // View All Employees
 viewAllEmployees = () => {
-  const sqlQuery = `SELECT et.id, et.first_name, et.last_name, rt.title, dt.name as "Department", salary, 
-    CONCAT (mt.first_name," ", mt.last_name) AS "Manager" 
-    FROM employees et INNER JOIN employees mt ON et.manager_id = mt.id 
-    LEFT JOIN roles rt ON et.role_id = rt.id LEFT JOIN department dt on rt.department_id = dt.id`;
+  const sqlQuery = `SELECT e.id, e.first_name, e.Last_name, r.title, d.name as "Department", salary
+  FROM employees as e
+  LEFT JOIN roles as r 
+  ON e.role_id = r.id 
+  LEFT JOIN department as d 
+  ON r.department_id = d.id`;
   connection.query(sqlQuery, (err, res) => {
     if (err) throw err;
     console.table(res);
+    prompts();
   });
 };
 
 // View All Employees by Department
-viewAllEmployeesByDepartment = () => {};
+viewAllEmployeesByDepartment = () => {
+  const sqlQuery = ``;
+  connection.query(sqlQuery, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    prompts();
+  });
+};
 
 // View All Employees by Role
-viewAllEmployeesByRole = () => {};
+viewAllEmployeesByRole = () => {
+  const sqlQuery = ``;
+  connection.query(sqlQuery, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    prompts();
+  });
+};
 
 // Add Employee
-addEmployee = () => {};
+addEmployee = () => {
+  const sqlQuery = ``;
+  connection.query(sqlQuery, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    prompts();
+  });
+};
 
 // Add Department
-addDepartment = () => {};
+addDepartment = () => {
+  const sqlQuery = ``;
+  connection.query(sqlQuery, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    prompts();
+  });
+};
 
 // Add Role
-addRole = () => {};
+addRole = () => {
+  const sqlQuery = ``;
+  connection.query(sqlQuery, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    prompts();
+  });
+};
 
 // Update Employee Role
-updateEmployeeRole = () => {};
+updateEmployeeRole = () => {
+  const sqlQuery = ``;
+  connection.query(sqlQuery, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    prompts();
+  });
+};
 
 // exit
 exit = () => {
