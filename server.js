@@ -2,7 +2,14 @@
 const inquirer = require("inquirer");
 
 // gets Specific arrays { questions } from questions.js
-const { questions, departments, managers } = require("./lib/questions.js");
+const {
+  questions,
+  departments,
+  managers,
+  addEmployee,
+  addDepartment,
+  addRole,
+} = require("./lib/questions.js");
 
 // gets Specific object { connection } from questions.js
 const { connection } = require("./db/connection.js");
@@ -94,11 +101,15 @@ viewAllEmployeesByManager = () => {
 
 // Add Employee
 addEmployee = () => {
-  const sqlQuery = ``;
-  connection.query(sqlQuery, (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    prompts();
+  inquirer.prompt(addEmployee).then((EmployeeData) => {
+    const sqlQuery = `
+    
+        `;
+    connection.query(sqlQuery, {}, (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      prompts();
+    });
   });
 };
 
