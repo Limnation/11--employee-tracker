@@ -9,8 +9,8 @@ const { connection } = require("./db/questions.js");
 
 // arrow fucntion that prompts
 const prompts = () => {
-  inquirer.prompt(questions).then((DBData) => {
-    switch (DBData.DBcases) {
+  inquirer.prompt(questions).then((questionsData) => {
+    switch (questionsData.cases) {
       case "View All Employees":
         viewAllEmployees();
         break;
@@ -40,7 +40,17 @@ const prompts = () => {
 };
 
 // View All Employees
-viewAllEmployees = () => {};
+viewAllEmployees = () => {
+  connection.query(
+    `SELECT e.id, e.first_name, e.Last_name, r.title, d.name as "Department", salary, 
+    CONCAT (m.first_name," ", m.last_name) AS "Manager" 
+    FROM employee e INNER JOIN employee m ON e.manager_id = m.id 
+    LEFT JOIN role r ON e.role_id = r.id LEFT JOIN department d on r.department_id = d.id`,
+    (err) => {
+      if (err) throw err;
+    }
+  );
+};
 
 // View All Employees by Department
 viewAllEmployeesByDepartment = () => {};
