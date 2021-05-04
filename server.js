@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 
 // gets Specific arrays { questions } from questions.js
-const { questions, departments } = require("./lib/questions.js");
+const { questions, departments, manager } = require("./lib/questions.js");
 
 // gets Specific object { connection } from questions.js
 const { connection } = require("./db/connection.js");
@@ -17,8 +17,8 @@ const prompts = () => {
       case "View All Employees by Department":
         viewAllEmployeesByDepartment();
         break;
-      case "View All Employees by Role":
-        viewAllEmployeesByRole();
+      case "View All Employees by Manager":
+        viewAllEmployeesByManager();
         break;
       case "Add Employee":
         addEmployee();
@@ -72,13 +72,15 @@ viewAllEmployeesByDepartment = () => {
   });
 };
 
-// View All Employees by Role
-viewAllEmployeesByRole = () => {
-  const sqlQuery = ``;
-  connection.query(sqlQuery, (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    prompts();
+// View All Employees by Manager
+viewAllEmployeesByManager = () => {
+  inquirer.prompt(manager).then((managerData) => {
+    const sqlQuery = ``;
+    connection.query(sqlQuery, (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      prompts();
+    });
   });
 };
 

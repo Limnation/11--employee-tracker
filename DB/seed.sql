@@ -24,5 +24,5 @@ VALUES
 ('Billy', 'bobby', 3, NULL),
 ('Doggy', 'Toy', 4, 1),
 ('Burnett', 'Vodka', 5, 1),
-('Espolon', 'Tequila', 6, 1),
-('Tony', 'Tiger', 7, 1);
+('Espolon', 'Tequila', 6, 2),
+('Tony', 'Tiger', 7, 3);
