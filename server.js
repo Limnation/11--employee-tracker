@@ -99,6 +99,19 @@ viewAllEmployeesByManager = () => {
   });
 };
 
+// Select role Array for Prompt
+function selectRoleArr() {
+  var roleArr = [];
+  sqlQuery = `SELECT * FROM roles`;
+  connection.query(sqlQuery, function (err, res) {
+    if (err) throw err;
+    for (var i = 0; i < res.length; i++) {
+      roleArr.push(res[i].title);
+    }
+  });
+  return roleArr;
+}
+
 // Add Employee
 addEmployee = () => {
   inquirer.prompt(addEmployeeArr).then((EmployeeData) => {
@@ -162,3 +175,6 @@ function init() {
 
 // Function call to initialize app
 init();
+
+// Exports
+module.exports = { selectRoleArr };
