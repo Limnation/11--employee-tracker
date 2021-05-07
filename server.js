@@ -150,34 +150,34 @@ addRole = () => {
 };
 
 // View employees
-function viewEmployee() {
+viewEmployee = () => {
   var query = "SELECT * FROM employees";
   connection.query(query, function (err, res) {
     if (err) throw err;
     console.table(res);
     prompts();
   });
-}
+};
 
 // View Role
-function viewRole() {
-  var query = "SELECT * FROM role";
+viewRole = () => {
+  var query = "SELECT * FROM roles";
   connection.query(query, function (err, res) {
     if (err) throw err;
     console.table(res);
     prompts();
   });
-}
+};
 
 // View Department
-function viewDepartment() {
+viewDepartment = () => {
   var query = "SELECT * FROM department";
   connection.query(query, function (err, res) {
     if (err) throw err;
     console.table(res);
     prompts();
   });
-}
+};
 
 // Update Employee Role
 updateEmployeeRole = () => {
@@ -201,6 +201,3 @@ function init() {
 
 // Function call to initialize app
 init();
-
-// Exports
-module.exports = { selectRoleArr };
