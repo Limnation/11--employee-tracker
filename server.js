@@ -94,12 +94,12 @@ viewAllEmployeesByDepartment = () => {
 viewAllEmployeesByManager = () => {
   inquirer.prompt(managers).then((managerData) => {
     const sqlQuery = `
-    SELECT first_name, last_name, r.title
+    SELECT e.first_name, e.last_name, r.title, r.salary
     FROM employees e
     LEFT JOIN roles r ON e.role_id = r.id
     LEFT JOIN department d ON d.id = r.department_id
-    where first_name='${managerData.managerFName}'
-    GROUP BY first_name, last_name, r.title;
+    where manager_id='${managerData.managerFName}'
+    GROUP BY first_name, last_name, r.title, r.salary;
     `;
     connection.query(sqlQuery, (err, res) => {
       if (err) throw err;
