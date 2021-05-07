@@ -131,21 +131,43 @@ addEmployee = () => {
 
 // Add Department
 addDepartment = () => {
-  const sqlQuery = ``;
-  connection.query(sqlQuery, (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    prompts();
+  inquirer.prompt(addEmployeeArr).then((EmployeeData) => {
+    const sqlQuery = `INSERT INTO department SET ?;`;
+    connection.query(
+      sqlQuery,
+      {
+        first_name: EmployeeData.fName,
+        last_name: EmployeeData.LName,
+        role_id: EmployeeData.role,
+        manager_id: EmployeeData.managerName,
+      },
+      (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        prompts();
+      }
+    );
   });
 };
 
 // Add Role
 addRole = () => {
-  const sqlQuery = ``;
-  connection.query(sqlQuery, (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    prompts();
+  inquirer.prompt(addEmployeeArr).then((EmployeeData) => {
+    const sqlQuery = `INSERT INTO roles SET ?;`;
+    connection.query(
+      sqlQuery,
+      {
+        first_name: EmployeeData.fName,
+        last_name: EmployeeData.LName,
+        role_id: EmployeeData.role,
+        manager_id: EmployeeData.managerName,
+      },
+      (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        prompts();
+      }
+    );
   });
 };
 
