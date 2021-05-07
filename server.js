@@ -131,15 +131,12 @@ addEmployee = () => {
 
 // Add Department
 addDepartment = () => {
-  inquirer.prompt(addEmployeeArr).then((EmployeeData) => {
+  inquirer.prompt(addEmployeeArr).then((departmentData) => {
     const sqlQuery = `INSERT INTO department SET ?;`;
     connection.query(
       sqlQuery,
       {
-        first_name: EmployeeData.fName,
-        last_name: EmployeeData.LName,
-        role_id: EmployeeData.role,
-        manager_id: EmployeeData.managerName,
+        name: departmentData.d_name,
       },
       (err, res) => {
         if (err) throw err;
@@ -152,15 +149,14 @@ addDepartment = () => {
 
 // Add Role
 addRole = () => {
-  inquirer.prompt(addEmployeeArr).then((EmployeeData) => {
+  inquirer.prompt(addEmployeeArr).then((rolesData) => {
     const sqlQuery = `INSERT INTO roles SET ?;`;
     connection.query(
       sqlQuery,
       {
-        first_name: EmployeeData.fName,
-        last_name: EmployeeData.LName,
-        role_id: EmployeeData.role,
-        manager_id: EmployeeData.managerName,
+        title: rolesData.r_title,
+        salary: EmployeeData.r_salary,
+        department_id: EmployeeData.r_department_id,
       },
       (err, res) => {
         if (err) throw err;
