@@ -36,6 +36,15 @@ const prompts = () => {
       case "Add Role":
         addRole();
         break;
+      case "View Employee":
+        viewEmployee();
+        break;
+      case "View Department":
+        viewDepartment();
+        break;
+      case "View Role":
+        viewRole();
+        break;
       case "Update Employee Role":
         updateEmployeeRole();
         break;
@@ -152,6 +161,36 @@ addRole = () => {
     prompts();
   });
 };
+
+// View employees
+function viewEmployee() {
+  var query = "";
+  connection.query(query, function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    prompts();
+  });
+}
+
+// View Role
+function viewRole() {
+  var query = "";
+  connection.query(query, function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    prompts();
+  });
+}
+
+// View Department
+function viewDepartment() {
+  var query = "";
+  connection.query(query, function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    prompts();
+  });
+}
 
 // Update Employee Role
 updateEmployeeRole = () => {
