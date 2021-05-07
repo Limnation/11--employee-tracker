@@ -12,7 +12,7 @@ const {
 } = require("./lib/questions.js");
 
 // gets Specific object { connection } from questions.js
-const { connection } = require("./db/connection.js");
+const { connection } = require("./db/connectiond.js");
 
 // arrow fucntion that prompts
 const prompts = () => {
@@ -107,6 +107,19 @@ viewAllEmployeesByManager = () => {
     });
   });
 };
+
+// Select role Array for Prompt
+function selectRoleArr() {
+  var roleArr = [];
+  const sqlQuery = `SELECT * FROM roles;`;
+  connection.query(sqlQuery, function (err, res) {
+    if (err) throw err;
+    for (var i = 0; i < res.length; i++) {
+      roleArr.push(res[i].title);
+    }
+  });
+  return roleArr;
+}
 
 // Add Employee
 addEmployee = () => {
