@@ -9,6 +9,7 @@ const {
   addEmployeeArr,
   addDepartmentArr,
   addRoleArr,
+  updateEmployeeRoleArr,
 } = require("./lib/questions.js");
 
 // gets Specific object { connection } from questions.js
@@ -18,8 +19,8 @@ const { connection } = require("./db/connection.js");
 const prompts = () => {
   inquirer.prompt(questions).then((questionsData) => {
     switch (questionsData.cases) {
-      case "View All Employees":
-        viewAllEmployees();
+      case "View All":
+        viewAll();
         break;
       case "View All Employees by Department":
         viewAllEmployeesByDepartment();
@@ -55,9 +56,9 @@ const prompts = () => {
   });
 };
 
-// View All Employees
-viewAllEmployees = () => {
-  const sqlQuery = `SELECT e.id, e.first_name, e.Last_name, r.title, d.name as "Department", salary
+// View All
+viewAll = () => {
+  const sqlQuery = `SELECT e.id, e.first_name as "First Name", e.Last_name as "Last Name", r.title as "Role", d.name as "Department", salary
   FROM employees as e
   LEFT JOIN roles as r 
   ON e.role_id = r.id 
@@ -131,7 +132,7 @@ addEmployee = () => {
 
 // Add Department
 addDepartment = () => {
-  inquirer.prompt(addEmployeeArr).then((departmentData) => {
+  inquirer.prompt(addDepartmentArr).then((departmentData) => {
     const sqlQuery = `INSERT INTO department SET ?;`;
     connection.query(
       sqlQuery,
@@ -149,7 +150,7 @@ addDepartment = () => {
 
 // Add Role
 addRole = () => {
-  inquirer.prompt(addEmployeeArr).then((rolesData) => {
+  inquirer.prompt(addRoleArr).then((rolesData) => {
     const sqlQuery = `INSERT INTO roles SET ?;`;
     connection.query(
       sqlQuery,
@@ -199,11 +200,20 @@ viewDepartment = () => {
 
 // Update Employee Role
 updateEmployeeRole = () => {
-  const sqlQuery = ``;
-  connection.query(sqlQuery, (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    prompts();
+  inquirer.prompt(updateEmployeeRoleArr).then((employeerolesData) => {
+    const sqlQuery = `UPDATE employees SET role_id = ${employeerolesData.role} WHERE last_name = '${employeerolesData.LName}'`;
+    connection.query(
+      sqlQuery,
+      {
+        last_name: employeerolesData.LName,
+        role_id: employeerolesData.role,
+      },
+      (err, res) => {
+        if (err) throw err;
+        console.log(`${employeerolesData.LName}'s role has been updated`);
+        prompts();
+      }
+    );
   });
 };
 
