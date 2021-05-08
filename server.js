@@ -123,7 +123,9 @@ addEmployee = () => {
       },
       (err, res) => {
         if (err) throw err;
-        console.table(res);
+        console.log(
+          `${EmployeeData.fName} ${EmployeeData.LName} has been added to Employees`
+        );
         prompts();
       }
     );
@@ -141,7 +143,7 @@ addDepartment = () => {
       },
       (err, res) => {
         if (err) throw err;
-        console.table(res);
+        console.log(`Department ${departmentData.d_name} has been added`);
         prompts();
       }
     );
@@ -156,12 +158,14 @@ addRole = () => {
       sqlQuery,
       {
         title: rolesData.r_title,
-        salary: EmployeeData.r_salary,
-        department_id: EmployeeData.r_department_id,
+        salary: rolesData.r_salary,
+        department_id: rolesData.r_department_id,
       },
       (err, res) => {
         if (err) throw err;
-        console.table(res);
+        console.log(
+          `The role ${rolesData.r_title} with a salery of ${rolesData.r_salary} has been added`
+        );
         prompts();
       }
     );
